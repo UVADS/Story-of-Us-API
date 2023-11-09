@@ -1,0 +1,17 @@
+dsiapi.sections:
+  path: '/api/sections/{id}'
+  defaults:
+    _controller: '\Drupal\storyapi\Controller\StoryApiController::sections'
+    _title: 'Sections'
+  requirements:
+    _access: 'TRUE'
+    _permission: 'access content'
+
+dsiapi.person:
+  path: '/api/person/{id}'
+  defaults:
+    _controller: '\Drupal\storyapi\Controller\StoryApiController::person'
+    _title: 'Person'
+  requirements:
+    _access: 'TRUE'
+    _permission: 'access content'

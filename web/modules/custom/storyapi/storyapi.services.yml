@@ -1,0 +1,11 @@
+services:
+  storyapi.node_entity:
+    class: Drupal\storyapi\Normalizer\NodeEntityNormalizer
+    arguments: ['@entity_type.manager', '@entity_type.repository', '@entity_field.manager']
+    tags:
+    - { name: normalizer, priority: 8 }
+  storyapi.taxonomy_term:
+    class: Drupal\storyapi\Normalizer\TaxonomyEntityNormalizer
+    arguments: ['@entity_type.manager', '@entity_type.repository', '@entity_field.manager']
+    tags:
+    - { name: normalizer, priority: 8 }
