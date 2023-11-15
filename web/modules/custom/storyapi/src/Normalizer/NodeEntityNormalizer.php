@@ -36,7 +36,8 @@ class NodeEntityNormalizer extends ContentEntityNormalizer {
     'field_description',
     'field_summary',
     'field_video',
-    'field_person_title'
+    'field_person_title',
+    'field_media_summary',
 
   ];
   protected $valueKeys = [
@@ -68,6 +69,7 @@ class NodeEntityNormalizer extends ContentEntityNormalizer {
   protected $loadableNestedEntityShifts = [
     'field_video' => [],
     'field_year_range' => ['value', 'end_value'],
+
 
   ];
 
@@ -536,19 +538,23 @@ protected $transforms = [
   }
   public function transformMedia($field){
   //  array_push($this->debug, $field);
-    //dump($field);
-    if(is_array($field))
+
+    if(is_array($field) && array_key_exists("field_media_image", $field))
     {
       $image = $field['field_media_image'][0];
       $fid = $image['target_id'];
       $file = \Drupal\file\Entity\File::load($fid);
       $alt = $image['alt'];
     }
+    else return null;
     $value = [
+      'id' => !empty($fid) ? $fid : NULL,
       'url' => !empty($file->uri->value)
       ? \Drupal::service('file_url_generator')->generateAbsoluteString($file->uri->value)
       : NULL,
       'alt' => !empty($alt) ? $alt : NULL,
+      'caption' => !empty($field['field_caption'][0]['value']) ? $field['field_caption'][0]['value'] : NULL,
+      'credit' => !empty($field['field_credit'][0]['value']) ? $field['field_credit'][0]['value'] : NULL
     ];
     return $value;
   }
@@ -576,15 +582,18 @@ protected $transforms = [
         elseif(array_key_exists("field_media_audio_file", $field)) {
           $file = $field['field_media_audio_file'][0];
         }
-          $fid = $file['target_id'];
+        $fid = $file['target_id'];
         $file = \Drupal\file\Entity\File::load($fid);
         $description = $field['name'][0]['value'];
       }
       $value = [
+        'id' => !empty($fid) ? $fid : NULL,
         'url' => !empty($file->uri->value)
         ? \Drupal::service('file_url_generator')->generateAbsoluteString($file->uri->value)
         : NULL,
         'description' => !empty($description) ? $description : NULL,
+        'summary' => !empty($field['field_summary'][0]['value']) ? $field['field_summary'][0]['value'] : NULL,
+        'name' => !empty($field['name'][0]['value']) ? $field['name'][0]['value'] : NULL,
       ];
       return $value;
     }
