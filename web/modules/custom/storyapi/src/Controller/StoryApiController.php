@@ -61,7 +61,7 @@ class StoryApiController extends ControllerBase{
    */
   public function sections($id = null) {
     $page = \Drupal::request()->query->get('page') ? (int) \Drupal::request()->query->get('page') : 0;
-    $perpage = \Drupal::request()->query->get('perpage') ? (int) \Drupal::request()->query->get('perpage') : 4;
+    $perpage = \Drupal::request()->query->get('perpage') ? (int) \Drupal::request()->query->get('perpage') : 15;
 
 
     $query = \Drupal::entityQuery('node')
