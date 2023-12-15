@@ -18,12 +18,16 @@ class NodeEntityNormalizer extends ContentEntityNormalizer {
  */
   protected $supportedInterfaceOrClass = 'Drupal\node\NodeInterface';
 
+
   /**
    * Entity fields to be returned.
    *
    * @var array
    */
   protected $fields = [];
+  protected $remap = [
+    'nid' => 'id'
+  ];
   protected $shifts = [
     'nid',
     'title',
@@ -458,6 +462,7 @@ protected $transforms = [
    * Add some custom fields.
    */
   public function addFields() {
+    dump($this->fields);
     $this->fields['path'] = Drupal::service('path_alias.manager')->getAliasByPath('/node/' . $this->fields['id']);
     return $this;
   }
