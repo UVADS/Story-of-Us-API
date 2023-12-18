@@ -462,7 +462,7 @@ protected $transforms = [
    * Add some custom fields.
    */
   public function addFields() {
-    dump($this->fields);
+    //dump($this->fields);
     $this->fields['path'] = Drupal::service('path_alias.manager')->getAliasByPath('/node/' . $this->fields['id']);
     return $this;
   }

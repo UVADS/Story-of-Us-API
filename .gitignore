@@ -60,3 +60,4 @@ drush
 /web/sites/*/translations
 /web/sites/*/tmp
 /web/sites/*/cache
+/web/sites/*/files
