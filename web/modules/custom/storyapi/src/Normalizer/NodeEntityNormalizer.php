@@ -41,7 +41,7 @@ class NodeEntityNormalizer extends ContentEntityNormalizer {
     'field_summary',
     'field_video',
     'field_person_title',
-    'field_media_summary',
+    'field_media_summary'
 
   ];
   protected $valueKeys = [
@@ -57,8 +57,11 @@ class NodeEntityNormalizer extends ContentEntityNormalizer {
     'field_video' => ['target_id', 'target_type', 'url'],
     'field_section_chapter' => ['target_id', 'target_type', 'url'],
     //'field_year_range' => ['value','end_value']
+  //  'field_topics' => ['target_id', 'target_type', 'url'],
   ];
   protected $loadableNestedEntities = [
+
+    'field_topics' => ['name' => 'value', 'path' => 'url()', 'id' => 'id'],
     'field_connected_people' => ['name' => 'value', 'path' => 'url()', 'id' => 'id'],
     'field_section_chapter' =>['name' => 'value', 'path' => 'url()', 'id' => 'id'],
     'field_files' => [],
@@ -159,7 +162,7 @@ protected $transforms = [
       }
       return $field;
     };
-   // dump($this->fields);
+    //dump($this->fields);
     $fields = $this->fields;
     $keys = array_keys($fields);
 
@@ -176,7 +179,7 @@ protected $transforms = [
     }, $keys);
 
     $this->fields = array_combine($keys, $values);
-   // dump($this->fields);
+    //dump($this->fields);
     return $this;
   }
 
@@ -533,7 +536,7 @@ protected $transforms = [
    * Perform transformations on fields before returning.
    */
   public function transformSingleArray($field) {
-    dump($field);
+    //dump($field);
   }
 
   public function getNode($nid)

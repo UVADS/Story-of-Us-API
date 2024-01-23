@@ -62,6 +62,7 @@ class TaxonomyEntityNormalizer extends ContentEntityNormalizer {
     //'field_year_range' => ['value','end_value']
   ];
   protected $loadableNestedEntities = [
+    //'field_topics' => ['name' => 'value', 'path' => 'url()', 'id' => 'id'],
     'field_connected_people' => ['name' => 'value', 'path' => 'url()', 'id' => 'id'],
     'field_section_chapter' =>['name' => 'value', 'path' => 'url()', 'id' => 'id'],
     'field_files' => [],
@@ -179,7 +180,7 @@ protected $transforms = [
     }, $keys);
 
     $this->fields = array_combine($keys, $values);
-   // dump($this->fields);
+    dump($this->fields);
     return $this;
   }
 
@@ -538,7 +539,7 @@ protected $transforms = [
   }
   public function transformMedia($field){
   //  array_push($this->debug, $field);
-    //dump($field);
+    dump($field);
     if(is_array($field))
     {
       $image = $field['field_media_image'][0];
