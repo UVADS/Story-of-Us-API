@@ -180,7 +180,7 @@ protected $transforms = [
     }, $keys);
 
     $this->fields = array_combine($keys, $values);
-    dump($this->fields);
+    //dump($this->fields);
     return $this;
   }
 
@@ -539,7 +539,7 @@ protected $transforms = [
   }
   public function transformMedia($field){
   //  array_push($this->debug, $field);
-    dump($field);
+    //dump($field);
     if(is_array($field))
     {
       $image = $field['field_media_image'][0];
