@@ -136,6 +136,45 @@ return new JsonResponse([
 ]);
 }
 
+public function topic($id = null) {
+  $page = \Drupal::request()->query->get('page') ? (int) \Drupal::request()->query->get('page') : 0;
+  $perpage = \Drupal::request()->query->get('perpage') ? (int) \Drupal::request()->query->get('perpage') : 4;
+
+
+  $topic = \Drupal\taxonomy\Entity\Term::load($id);
+  $topic = Drupal::service('serializer')->normalize($topic);
+
+  $query = \Drupal::entityQuery('node')
+  ->accessCheck(TRUE)
+  ->condition('type', 'section')
+  ->condition('status', 1)
+  ->sort('field_year_range', 'ASC');
+
+$query->condition('field_topics.target_id', $id, 'IN');
+$queryClone = clone $query;
+$total = $queryClone->count()->execute();
+
+$nids = $query->pager($perpage)->execute();
+$nodes = Node::loadMultiple($nids);
+
+$count = count($nodes);
+$sections = [];
+foreach ($nodes as $node) {
+  $sections[] = Drupal::service('serializer')->normalize($node);
+}
+
+return new JsonResponse([
+  'topic' => $topic,
+  'sections' => $sections,
+  'count' => $count,
+  'meta' => [
+    'page' => $page,
+    'perpage' => $perpage,
+    'total' => $total,
+    'totalpages' => ceil($total / $perpage),
+  ],
+]);
+}
 
   /**
    * Get story_tags for admissions.
