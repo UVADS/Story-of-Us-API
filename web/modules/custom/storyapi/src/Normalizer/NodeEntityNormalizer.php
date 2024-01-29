@@ -39,7 +39,6 @@ class NodeEntityNormalizer extends ContentEntityNormalizer {
     'body',
     'field_description',
     'field_summary',
-    'field_video',
     'field_person_title',
     'field_media_summary'
 
@@ -54,7 +53,7 @@ class NodeEntityNormalizer extends ContentEntityNormalizer {
     'field_event_date' => '_no_key_',
   ];
   protected $filters = [
-    'field_video' => ['target_id', 'target_type', 'url'],
+    //'field_video' => ['target_id', 'target_type', 'url'],
     'field_section_chapter' => ['target_id', 'target_type', 'url'],
     //'field_year_range' => ['value','end_value']
   //  'field_topics' => ['target_id', 'target_type', 'url'],
@@ -261,6 +260,7 @@ protected $transforms = [
       }
     }
     $this->fields = array_merge($this->fields, $fields);
+    //dump($this->fields);
     return $this;
   }
 
@@ -567,6 +567,7 @@ protected $transforms = [
     return $value;
   }
   public function transformRemoteVideo($field) {
+    //dump($field);
     $video = null;
     if(is_array($field))
      {
@@ -574,7 +575,8 @@ protected $transforms = [
        {
          $video = $field['field_media_oembed_video'][0];
        }
-       return $video['value'];
+       //dump($video);
+       return $video;
     }
 
 
