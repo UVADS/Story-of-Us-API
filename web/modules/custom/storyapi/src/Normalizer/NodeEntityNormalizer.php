@@ -602,10 +602,17 @@ protected $transforms = [
         ? \Drupal::service('file_url_generator')->generateAbsoluteString($file->uri->value)
         : NULL,
         'description' => !empty($description) ? $description : NULL,
-        'summary' => !empty($field['field_summary'][0]['value']) ? $field['field_summary'][0]['value'] : NULL,
-        'name' => !empty($field['name'][0]['value']) ? $field['name'][0]['value'] : NULL,
+        'summary' => $this->getFieldValue($field, 'field_media_summary'),
+        'name' => $this->getFieldValue($field, 'name'),
+        'author' => $this->getFieldValue($field, 'field_source_author'),
+        'source_link' => $this->getFieldValue($field, 'field_source_link'),
+        'pub_title' => $this->getFieldValue($field, 'field_source_title'),
       ];
       return $value;
+    }
+   public function getFieldValue($field, $name) {
+      return !empty($field[$name][0]['value']) ? $field[$name][0]['value'] : NULL;
+
     }
   /**
    * Perform transformations on fields before returning.

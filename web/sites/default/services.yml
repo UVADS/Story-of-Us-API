@@ -208,12 +208,12 @@ parameters:
   cors.config:
     enabled: true
     # Specify allowed headers, like 'x-allowed-header'.
-    allowedHeaders: ['x-csrf-token','authorization','content-type','accept','origin','x-requested-with', 'access-control-allow-origin','x-allowed-header','*']
-    # Specify allowed request methods, specify ['*'] to allow all possible ones.
-    allowedMethods: [*]
+    allowedHeaders: ['*']
+    # Specify allowd request methods, specify ['*'] to allow all possible ones.
+    allowedMethods: ['*']
     # Configure requests allowed from specific origins. Do not include trailing
     # slashes with URLs.
-    allowedOrigins: ['*']
+    allowedOrigins: ['https://localhost:4500', 'https://story-ds.netlify.com', '*']
     # Configure requests allowed from origins, matching against regex patterns.
     allowedOriginsPatterns: []
     # Sets the Access-Control-Expose-Headers header.
