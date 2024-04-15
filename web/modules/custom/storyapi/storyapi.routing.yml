@@ -8,7 +8,7 @@ dsiapi.sections:
     _permission: "access content"
 
 dsiapi.person:
-  path: "/api/person/{id}"
+  path: "/api/person/{id?}"
   defaults:
     _controller: '\Drupal\storyapi\Controller\StoryApiController::person'
     _title: "Person"
@@ -17,7 +17,7 @@ dsiapi.person:
     _permission: "access content"
 
 dsiapi.topic:
-  path: "/api/topic/{id}"
+  path: "/api/topic/{id?}"
   defaults:
     _controller: '\Drupal\storyapi\Controller\StoryApiController::topic'
     _title: "Topic"
