@@ -81,10 +81,10 @@ class StoryApiController extends ControllerBase{
     $count = count($nodes);
     $stories = [];
     foreach ($nodes as $node) {
-      $stories[] = Drupal::service('serializer')->normalize($node);
+      $sections[] = Drupal::service('serializer')->normalize($node);
     }
     return new JsonResponse([
-      'results' => $stories,
+      'results' => $sections,
       'count' => $count,
       'meta' => [
         'page' => $page,
