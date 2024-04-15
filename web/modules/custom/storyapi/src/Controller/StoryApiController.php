@@ -126,9 +126,7 @@ foreach ($nodes as $node) {
 }
 else {
   $nodes =\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree("person");
-  $person = \Drupal\taxonomy\Entity\Term::loadMultiple(array_column($nodes, 'tid'));
-  $person = Drupal::service('serializer')->normalize($person);
-
+  $terms = \Drupal\taxonomy\Entity\Term::loadMultiple(array_column($nodes, 'tid'));
 
   foreach ($terms as $term) {
     $person[] = Drupal::service('serializer')->normalize($term);
@@ -180,9 +178,7 @@ $sections = [];
 else
 {
   $nodes =\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree("topics");
-  $topic = \Drupal\taxonomy\Entity\Term::loadMultiple(array_column($nodes, 'tid'));
-  $topic = Drupal::service('serializer')->normalize($topic);
-
+  $terms = \Drupal\taxonomy\Entity\Term::loadMultiple(array_column($nodes, 'tid'));
 
   foreach ($terms as $term) {
     $topic[] = Drupal::service('serializer')->normalize($term);
